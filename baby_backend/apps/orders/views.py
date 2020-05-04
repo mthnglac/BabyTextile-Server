@@ -70,7 +70,7 @@ class OrderShippingInformationViewSet(ModelViewSet):
     def get_queryset(self):
         if hasattr(self.request.user, 'vendor'):
             qs = OrderShippingInformation.objects.filter(
-                shipping_information__in=self.request.user.billing_profile.order_set.all()
+                order__in=self.request.user.billing_profile.order_set.all()
             )
         else:
             qs = OrderShippingInformation.objects.all()  # for superuser and staff users
@@ -93,7 +93,7 @@ class OrderShippingMovementViewSet(ModelViewSet):
                 shipping_information__in=self.request.user.billing_profile.order_set.all()
             )
         else:
-            qs = OrderShippingInformation.objects.all()  # for superuser and staff users
+            qs = OrderShippingMovement.objects.all()  # for superuser and staff users
         return qs
 
 

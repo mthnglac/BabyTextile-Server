@@ -80,7 +80,7 @@ class Vendor(models.Model):
     def calculate_total_commission_amount(self):
         qs = self.user.billing_profile.order_set.all()
         if qs.exists():
-            commission_total = 0
+            commission_total = Decimal(0.00)
             for i in qs:
                 commission_total += i.commission_amount
             return commission_total

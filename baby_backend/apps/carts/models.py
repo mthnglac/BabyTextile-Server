@@ -7,38 +7,16 @@ from ..products.models import Product
 from baby_backend.utils.utils import calculate_nearest_half
 
 
-class CartManager(models.Manager):
-    def new_or_get(self, request):
-        created = False
-        cart_id = request.session.get('cart_id', None)
-        qs = self.get_queryset().first(id=cart_id)
-        if qs.count() == 1:
-            obj = qs.first()
-            if request.user.is_authenticated and obj.user is None:
-                obj.user = request.user
-                obj.save()
-        else:
-            user_obj = None
-            if request.user is not None and request.user.is_authenticated:
-                user_obj = request.user
-            obj = self.model.objects.create(
-                user=user_obj
-            )
-            created = True
-        return obj, created
-
-
 class Cart(models.Model):
     cart_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique Cart ID'))
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_('User'))
     qty = models.PositiveSmallIntegerField(default=0, verbose_name=_('Quantity'))
     subtotal = models.DecimalField(
         blank=True, default=Decimal(0.00), max_digits=100, decimal_places=2, verbose_name=_('Subtotal'))
-    total = models.DecimalField(blank=True, default=Decimal(0.00), max_digits=100, decimal_places=2, verbose_name=_('Total'))
+    total = models.DecimalField(blank=True, default=Decimal(0.00), max_digits=100, decimal_places=2,
+                                verbose_name=_('Total'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Cart'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Cart'))
-
-    objects = CartManager()
 
     def __str__(self):
         return str(self.pk) \
@@ -77,7 +55,7 @@ class Cart(models.Model):
         qs = self.cartitem_set.all()
         total_item_qty = qs.count()
         total_product_qty = sum([i.qty for i in qs])  # nays
-        subtotal_amount = 0
+        subtotal_amount = Decimal(0.00)
         for i in qs:
             subtotal_amount += (i.line_total * i.qty)
         total_amount = calculate_nearest_half(Decimal(subtotal_amount) * Decimal(1.22))
@@ -86,30 +64,6 @@ class Cart(models.Model):
             'total_product_qty': total_product_qty,
             'subtotal_amount': subtotal_amount,
             'total_amount': total_amount}
-
-
-class CartItemManager(models.Manager):
-    def new_or_update(self, product_obj, cart_obj, item_qty=1):
-        created = False
-        qs = self.get_queryset().filter(
-            cart=cart_obj,
-            product=product_obj
-        )
-        if qs.count() == 1:
-            obj = qs.first()
-            obj.qty += item_qty
-            obj.save()
-        else:
-            obj = self.model.objects.create(
-                cart=cart_obj,
-                product=product_obj,
-                qty=item_qty,
-                line_total=product_obj.sale_price * item_qty
-            )
-            obj.cart.qty += 1
-            obj.cart.save()
-            created = True
-        return obj, created
 
 
 class CartItem(models.Model):
@@ -128,8 +82,6 @@ class CartItem(models.Model):
                                       verbose_name=_('Create date of Cart'))
     updated_at = models.DateTimeField(auto_now=True,
                                       verbose_name=_('Update date of Cart'))
-
-    objects = CartItemManager()
 
     def __str__(self):
         return self.product.name

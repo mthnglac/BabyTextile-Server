@@ -61,14 +61,12 @@ class OrderShippingInformation(models.Model):
     def __str__(self):
         if self.shipping_company != '' and self.tracking_number != '':
             return '{} | {} | {}'.format(
-                self.customer.user.username,
                 self.payment_method,
                 self.shipping_company,
                 self.tracking_number
             )
         else:
-            return '{} | {}'.format(
-                self.customer.user.username,
+            return '{}'.format(
                 self.payment_method
             )
 
@@ -222,7 +220,7 @@ class Order(models.Model):
     objects = OrderManager()
 
     def __str__(self):
-        return '{} | {}'.format(self.billing_profile.user, str(self.order_id))
+        return str(self.order_id)
 
     class Meta:
         ordering = ['-updated_at']
@@ -231,7 +229,7 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         # if user is vendor
-        if hasattr(self.billing_profile.user, 'vendor'):
+        if hasattr(self.billing_profile, 'user') and hasattr(self.billing_profile.user, 'vendor'):
             # calculate vendor commission amount
             self.commission_amount = self.calculate_vendor_commission_amount()
 
@@ -353,7 +351,7 @@ class Order(models.Model):
     def calculate_purchase_items(self):
         qs = self.productpurchase_set.all()
         total_purchase_product_qty = sum([i.qty for i in qs])  # nays
-        total_purchase_amount = 0
+        total_purchase_amount = Decimal(0.00)
         for i in qs:
             total_purchase_amount += i.line_total
         return {
