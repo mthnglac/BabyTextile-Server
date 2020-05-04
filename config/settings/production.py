@@ -1,15 +1,13 @@
 import logging
+from datetime import timedelta
 
 import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
-from sentry_sdk.integrations.celery import CeleryIntegration
-
 
 from .base import *  # noqa
 from .base import env
-
-from datetime import timedelta
 
 # GENERAL
 # ------------------------------------------------------------------------------
