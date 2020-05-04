@@ -1,18 +1,20 @@
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
-
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
-from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
-from baby_backend.utils.utils import unique_guest_vendor_username_generator, random_string_generator
-from ..accounts.serializers import UserRootSerializer
+from baby_backend.utils.utils import (
+    random_string_generator,
+    unique_guest_vendor_username_generator,
+)
+
 from ..accounts.permissions import IsStaffOrGuestReadOnly
-from .permissions import IsAssociatedWithGuest
+from ..accounts.serializers import UserRootSerializer
 from .models import GuestVendor
-from .serializers import GuestVendorSerializer, GuestVendorRootSerializer
+from .permissions import IsAssociatedWithGuest
+from .serializers import GuestVendorRootSerializer, GuestVendorSerializer
 
 
 class GuestVendorViewSet(ModelViewSet):
@@ -32,7 +34,7 @@ class GuestVendorViewSet(ModelViewSet):
         return qs
 
     @action(detail=False, permission_classes=[IsAdminUser])
-    def generate_guestvendor(self, request, pk=None):
+    def generate_guest_vendor(self, request, pk=None):
         unique_guest_username = unique_guest_vendor_username_generator()
         random_guest_password = random_string_generator()
 

@@ -1,24 +1,35 @@
 from django.utils.translation import ugettext_lazy as _
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
-from ..accounts.permissions import IsStaffReadOnlyOrCustomerRestricted, \
-    IsStaffReadOnlyOrCustomer, IsStaffReadOnlyOrCustomerReadOnly
-from .permissions import \
-    IsAssociatedWithCustomerDeliveryAddress, \
-    IsAssociatedWithCustomerBillingAddress, \
-    IsAssociatedWithCustomerDiscount, IsAssociatedWithCustomer
-from .models import Customer, CustomerDeliveryAddress, CustomerBillingAddress, CustomerDiscount
-from .serializers import \
-    CustomerSerializer, \
-    CustomerRootSerializer, \
-    CustomerDeliveryAddressSerializer, \
-    CustomerDeliveryAddressRootSerializer, \
-    CustomerBillingAddressSerializer, \
-    CustomerBillingAddressRootSerializer, \
-    CustomerDiscountSerializer, \
-    CustomerDiscountRootSerializer
+from ..accounts.permissions import (
+    IsStaffReadOnlyOrCustomer,
+    IsStaffReadOnlyOrCustomerReadOnly,
+    IsStaffReadOnlyOrCustomerRestricted,
+)
+from .models import (
+    Customer,
+    CustomerBillingAddress,
+    CustomerDeliveryAddress,
+    CustomerDiscount,
+)
+from .permissions import (
+    IsAssociatedWithCustomer,
+    IsAssociatedWithCustomerBillingAddress,
+    IsAssociatedWithCustomerDeliveryAddress,
+    IsAssociatedWithCustomerDiscount,
+)
+from .serializers import (
+    CustomerBillingAddressRootSerializer,
+    CustomerBillingAddressSerializer,
+    CustomerDeliveryAddressRootSerializer,
+    CustomerDeliveryAddressSerializer,
+    CustomerDiscountRootSerializer,
+    CustomerDiscountSerializer,
+    CustomerRootSerializer,
+    CustomerSerializer,
+)
 
 
 class CustomerViewSet(ModelViewSet):

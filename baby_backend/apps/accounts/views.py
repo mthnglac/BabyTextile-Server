@@ -1,14 +1,14 @@
-from rest_framework.exceptions import NotFound
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from rest_framework.decorators import action
+from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet
 
 from .permissions import IsAssociatedWithUser, IsStaffReadOnlyOrVendorPatchOnly
-from .serializers import UserSerializer, UserRootSerializer, UserVendorSerializer
+from .serializers import UserRootSerializer, UserSerializer, UserVendorSerializer
 
 
 class UserViewSet(ModelViewSet):

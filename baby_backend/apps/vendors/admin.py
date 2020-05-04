@@ -1,13 +1,15 @@
 from django.contrib import admin
-from .models import \
-    Vendor, \
-    VendorDeliveryAddress, \
-    VendorBillingAddress, \
-    VendorBankAccount, \
-    VendorInstagram, \
-    VendorBalance, \
-    VendorDiscount, \
-    VendorCustomer
+
+from .models import (
+    Vendor,
+    VendorBalance,
+    VendorBankAccount,
+    VendorBillingAddress,
+    VendorCustomer,
+    VendorDeliveryAddress,
+    VendorDiscount,
+    VendorInstagram,
+)
 
 
 class VendorDeliveryAddressInline(admin.TabularInline):

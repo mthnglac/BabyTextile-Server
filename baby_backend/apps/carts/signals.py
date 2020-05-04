@@ -1,10 +1,13 @@
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
-from .models import Cart, CartItem
-from ..orders.models import Order
+from baby_backend.utils.utils import (
+    unique_cart_id_generator,
+    unique_cart_item_id_generator,
+)
 
-from baby_backend.utils.utils import unique_cart_id_generator, unique_cart_item_id_generator
+from ..orders.models import Order
+from .models import Cart, CartItem
 
 
 @receiver(pre_save, sender=Cart)

@@ -1,10 +1,11 @@
+import datetime
 import os
 import random
 import string
-import datetime
-from django.utils.text import slugify
-from decimal import Decimal, ROUND_HALF_EVEN
+from decimal import ROUND_HALF_EVEN, Decimal
+
 from django.contrib.auth.models import User
+from django.utils.text import slugify
 
 
 def calculate_nearest_half(decimal_number):   # Swedish rounding

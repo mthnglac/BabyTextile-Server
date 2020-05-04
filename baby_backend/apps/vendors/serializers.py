@@ -1,14 +1,15 @@
 from rest_framework import serializers
 
-from .models import \
-    Vendor, \
-    VendorDeliveryAddress, \
-    VendorBillingAddress, \
-    VendorBankAccount, \
-    VendorInstagram, \
-    VendorDiscount, \
-    VendorBalance, \
-    VendorCustomer
+from .models import (
+    Vendor,
+    VendorBalance,
+    VendorBankAccount,
+    VendorBillingAddress,
+    VendorCustomer,
+    VendorDeliveryAddress,
+    VendorDiscount,
+    VendorInstagram,
+)
 
 
 class VendorDeliveryAddressRootSerializer(serializers.HyperlinkedModelSerializer):

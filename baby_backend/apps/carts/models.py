@@ -1,10 +1,12 @@
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
 from decimal import Decimal
 
-from ..products.models import Product
+from django.contrib.auth.models import User
+from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
 from baby_backend.utils.utils import calculate_nearest_half
+
+from ..products.models import Product
 
 
 class Cart(models.Model):

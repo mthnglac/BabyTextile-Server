@@ -1,16 +1,17 @@
 from rest_framework import serializers
-from taggit_serializer.serializers import TagListSerializerField, TaggitSerializer
+from taggit_serializer.serializers import TaggitSerializer, TagListSerializerField
 
-from ..products.models import \
-    Product, \
-    ProductBrand, \
-    ProductModel, \
-    ProductSize, \
-    ProductColor, \
-    ProductVAT, \
-    ProductCategory, \
-    ProductFile, \
-    ProductImage
+from ..products.models import (
+    Product,
+    ProductBrand,
+    ProductCategory,
+    ProductColor,
+    ProductFile,
+    ProductImage,
+    ProductModel,
+    ProductSize,
+    ProductVAT,
+)
 
 
 class ProductFileRootSerializer(serializers.HyperlinkedModelSerializer):

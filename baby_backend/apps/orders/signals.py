@@ -1,8 +1,9 @@
-from django.db.models.signals import pre_save, post_delete
+from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 
-from .models import Order
 from baby_backend.utils.utils import unique_order_id_generator
+
+from .models import Order
 
 
 @receiver(pre_save, sender=Order)

@@ -1,11 +1,15 @@
-from django.db.models.signals import pre_save, post_save, pre_delete
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
-from .models import Customer, CustomerBillingAddress, CustomerDiscount
+from baby_backend.utils.utils import (
+    unique_customer_discount_code_generator,
+    unique_customer_id_generator,
+    unique_slug_generator,
+)
+
 from ..billing.models import BillingProfile
 from ..carts.models import Cart
-from baby_backend.utils.utils import unique_customer_id_generator, unique_customer_discount_code_generator, \
-    unique_slug_generator
+from .models import Customer, CustomerBillingAddress, CustomerDiscount
 
 
 @receiver(pre_save, sender=Customer)

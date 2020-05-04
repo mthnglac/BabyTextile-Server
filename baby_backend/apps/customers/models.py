@@ -1,12 +1,12 @@
 import os
 import random
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
+
 from django.contrib.auth.models import User
+from django.db import models
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from baby_backend.utils.utils import unique_slug_generator
-from ..billing.models import BillingProfile
 
 BILLING_TYPE = (
     ('individual', _('Individual')),

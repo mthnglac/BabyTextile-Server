@@ -1,46 +1,53 @@
 from django.utils.translation import ugettext_lazy as _
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.throttling import UserRateThrottle
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.exceptions import PermissionDenied
-from ..accounts.permissions import IsStaffReadOnlyOrVendorRestricted, \
-    IsStaffOrVendor, IsStaffOrVendorReadOnly, IsStaffReadOnlyOrVendorPostOnly, IsStaffReadOnlyOrCustomer, \
-    IsStaffReadOnlyOrVendor, IsStaffReadOnlyOrVendorReadOnly
-from .permissions import \
-    IsAssociatedWithVendor, \
-    IsAssociatedWithBankAccount, \
-    IsAssociatedWithVendorDeliveryAddress, \
-    IsAssociatedWithVendorBillingAddress, \
-    IsAssociatedWithInstagram, \
-    IsAssociatedWithDiscount, \
-    IsAssociatedWithBalance, \
-    IsAssociatedWithVendorCustomer
-from .serializers import \
-    VendorSerializer, \
-    VendorRootSerializer, \
-    VendorBankAccountSerializer, \
-    VendorBankAccountRootSerializer, \
-    VendorDeliveryAddressSerializer, \
-    VendorDeliveryAddressRootSerializer, \
-    VendorBillingAddressSerializer, \
-    VendorBillingAddressRootSerializer, \
-    VendorInstagramSerializer, \
-    VendorInstagramRootSerializer, \
-    VendorDiscountRootSerializer, \
-    VendorDiscountSerializer, \
-    VendorBalanceSerializer, \
-    VendorBalanceRootSerializer, \
-    VendorCustomerSerializer, \
-    VendorCustomerRootSerializer
-from .models import \
-    Vendor, \
-    VendorBankAccount, \
-    VendorDeliveryAddress, \
-    VendorBillingAddress, \
-    VendorInstagram, \
-    VendorDiscount, \
-    VendorBalance, \
-    VendorCustomer
+
+from ..accounts.permissions import (
+    IsStaffReadOnlyOrVendor,
+    IsStaffReadOnlyOrVendorPostOnly,
+    IsStaffReadOnlyOrVendorReadOnly,
+    IsStaffReadOnlyOrVendorRestricted,
+)
+from .models import (
+    Vendor,
+    VendorBalance,
+    VendorBankAccount,
+    VendorBillingAddress,
+    VendorCustomer,
+    VendorDeliveryAddress,
+    VendorDiscount,
+    VendorInstagram,
+)
+from .permissions import (
+    IsAssociatedWithBalance,
+    IsAssociatedWithBankAccount,
+    IsAssociatedWithDiscount,
+    IsAssociatedWithInstagram,
+    IsAssociatedWithVendor,
+    IsAssociatedWithVendorBillingAddress,
+    IsAssociatedWithVendorCustomer,
+    IsAssociatedWithVendorDeliveryAddress,
+)
+from .serializers import (
+    VendorBalanceRootSerializer,
+    VendorBalanceSerializer,
+    VendorBankAccountRootSerializer,
+    VendorBankAccountSerializer,
+    VendorBillingAddressRootSerializer,
+    VendorBillingAddressSerializer,
+    VendorCustomerRootSerializer,
+    VendorCustomerSerializer,
+    VendorDeliveryAddressRootSerializer,
+    VendorDeliveryAddressSerializer,
+    VendorDiscountRootSerializer,
+    VendorDiscountSerializer,
+    VendorInstagramRootSerializer,
+    VendorInstagramSerializer,
+    VendorRootSerializer,
+    VendorSerializer,
+)
 
 
 class VendorViewSet(ModelViewSet):

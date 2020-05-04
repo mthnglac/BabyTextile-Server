@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Supplier, SupplierDeliveryAddress, SupplierBillingAddress
+from .models import Supplier, SupplierBillingAddress, SupplierDeliveryAddress
 
 
 class SupplierRootSerializer(serializers.HyperlinkedModelSerializer):

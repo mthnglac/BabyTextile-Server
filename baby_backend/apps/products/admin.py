@@ -1,14 +1,16 @@
 from django.contrib import admin
-from .models import \
-    Product, \
-    ProductCategory, \
-    ProductImage, \
-    ProductFile, \
-    ProductSize, \
-    ProductColor, \
-    ProductVAT, \
-    ProductBrand, \
-    ProductModel
+
+from .models import (
+    Product,
+    ProductBrand,
+    ProductCategory,
+    ProductColor,
+    ProductFile,
+    ProductImage,
+    ProductModel,
+    ProductSize,
+    ProductVAT,
+)
 
 
 class ProductFileInline(admin.TabularInline):

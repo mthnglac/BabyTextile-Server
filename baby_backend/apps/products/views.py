@@ -1,35 +1,38 @@
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
+
 from ..accounts.permissions import IsStaffOrVendorReadOnly
-from .serializers import \
-    ProductSerializer, \
-    ProductRootSerializer, \
-    ProductBrandSerializer, \
-    ProductBrandRootSerializer, \
-    ProductModelSerializer, \
-    ProductModelRootSerializer, \
-    ProductSizeSerializer, \
-    ProductSizeRootSerializer, \
-    ProductColorSerializer, \
-    ProductColorRootSerializer, \
-    ProductVATSerializer, \
-    ProductVATRootSerializer, \
-    ProductCategorySerializer, \
-    ProductCategoryRootSerializer, \
-    ProductFileSerializer, \
-    ProductFileRootSerializer, \
-    ProductImageSerializer, \
-    ProductImageRootSerializer
-from .models import \
-    Product, \
-    ProductBrand, \
-    ProductModel, \
-    ProductSize, \
-    ProductColor, \
-    ProductVAT, \
-    ProductCategory, \
-    ProductFile, \
-    ProductImage
+from .models import (
+    Product,
+    ProductBrand,
+    ProductCategory,
+    ProductColor,
+    ProductFile,
+    ProductImage,
+    ProductModel,
+    ProductSize,
+    ProductVAT,
+)
+from .serializers import (
+    ProductBrandRootSerializer,
+    ProductBrandSerializer,
+    ProductCategoryRootSerializer,
+    ProductCategorySerializer,
+    ProductColorRootSerializer,
+    ProductColorSerializer,
+    ProductFileRootSerializer,
+    ProductFileSerializer,
+    ProductImageRootSerializer,
+    ProductImageSerializer,
+    ProductModelRootSerializer,
+    ProductModelSerializer,
+    ProductRootSerializer,
+    ProductSerializer,
+    ProductSizeRootSerializer,
+    ProductSizeSerializer,
+    ProductVATRootSerializer,
+    ProductVATSerializer,
+)
 
 
 class ProductViewSet(ModelViewSet):

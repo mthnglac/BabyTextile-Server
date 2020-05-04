@@ -1,6 +1,11 @@
 from rest_framework import serializers
 
-from .models import Customer, CustomerDeliveryAddress, CustomerBillingAddress, CustomerDiscount
+from .models import (
+    Customer,
+    CustomerBillingAddress,
+    CustomerDeliveryAddress,
+    CustomerDiscount,
+)
 
 
 class CustomerDiscountRootSerializer(serializers.HyperlinkedModelSerializer):

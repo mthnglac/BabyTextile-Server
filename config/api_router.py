@@ -3,43 +3,46 @@ from rest_framework.routers import DefaultRouter, SimpleRouter
 
 from baby_backend.apps.accounts.views import UserViewSet
 from baby_backend.apps.billing.views import BillingProfileViewSet  # and ChargeViewSet
-from baby_backend.apps.carts.views import \
-    CartViewSet, \
-    CartItemViewSet
-from baby_backend.apps.customers.views import \
-    CustomerViewSet, \
-    CustomerDeliveryAddressViewSet, \
-    CustomerBillingAddressViewSet, \
-    CustomerDiscountViewSet
-from baby_backend.apps.orders.views import \
-    OrderViewSet, \
-    OrderShippingInformationViewSet, \
-    OrderShippingMovementViewSet, \
-    ProductPurchaseViewSet
-from baby_backend.apps.products.views import \
-    ProductViewSet, \
-    ProductBrandViewSet, \
-    ProductModelViewSet, \
-    ProductSizeViewSet, \
-    ProductColorViewSet, \
-    ProductVATViewSet, \
-    ProductCategoryViewSet, \
-    ProductFileViewSet, \
-    ProductImageViewSet
-from baby_backend.apps.suppliers.views import \
-    SupplierViewSet, \
-    SupplierDeliveryAddressViewSet, \
-    SupplierBillingAddressViewSet
-from baby_backend.apps.vendors.views import \
-    VendorViewSet, \
-    VendorDeliveryAddressViewSet, \
-    VendorBillingAddressViewSet, \
-    VendorBankAccountViewSet, \
-    VendorInstagramViewSet, \
-    VendorDiscountViewSet, \
-    VendorBalanceViewSet, \
-    VendorCustomerViewSet
+from baby_backend.apps.carts.views import CartItemViewSet, CartViewSet
+from baby_backend.apps.customers.views import (
+    CustomerBillingAddressViewSet,
+    CustomerDeliveryAddressViewSet,
+    CustomerDiscountViewSet,
+    CustomerViewSet,
+)
 from baby_backend.apps.guests.views import GuestVendorViewSet
+from baby_backend.apps.orders.views import (
+    OrderShippingInformationViewSet,
+    OrderShippingMovementViewSet,
+    OrderViewSet,
+    ProductPurchaseViewSet,
+)
+from baby_backend.apps.products.views import (
+    ProductBrandViewSet,
+    ProductCategoryViewSet,
+    ProductColorViewSet,
+    ProductFileViewSet,
+    ProductImageViewSet,
+    ProductModelViewSet,
+    ProductSizeViewSet,
+    ProductVATViewSet,
+    ProductViewSet,
+)
+from baby_backend.apps.suppliers.views import (
+    SupplierBillingAddressViewSet,
+    SupplierDeliveryAddressViewSet,
+    SupplierViewSet,
+)
+from baby_backend.apps.vendors.views import (
+    VendorBalanceViewSet,
+    VendorBankAccountViewSet,
+    VendorBillingAddressViewSet,
+    VendorCustomerViewSet,
+    VendorDeliveryAddressViewSet,
+    VendorDiscountViewSet,
+    VendorInstagramViewSet,
+    VendorViewSet,
+)
 
 if settings.DEBUG:
     router = DefaultRouter()

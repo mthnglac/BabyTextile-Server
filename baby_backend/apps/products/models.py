@@ -1,15 +1,21 @@
 import os
 import random
 from decimal import Decimal
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.core.files.storage import FileSystemStorage
-from django.db.models import Q
+
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.db import models
+from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 from taggit.managers import TaggableManager
 
+from baby_backend.utils.utils import (
+    calculate_nearest_half,
+    get_filename,
+    unique_slug_generator,
+)
+
 from ..suppliers.models import Supplier
-from baby_backend.utils.utils import get_filename, unique_slug_generator, calculate_nearest_half
 
 
 def get_filename_ext(filepath):
@@ -91,7 +97,8 @@ class ProductColor(models.Model):
 
 
 class ProductVAT(models.Model):
-    vat_rate = models.DecimalField(max_digits=10, blank=False, unique=True, decimal_places=2, verbose_name=_('VAT Rate'))
+    vat_rate = models.DecimalField(max_digits=10, blank=False, unique=True, decimal_places=2,
+                                   verbose_name=_('VAT Rate'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Product VAT'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Product VAT'))
 

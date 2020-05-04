@@ -1,7 +1,7 @@
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
-from baby_backend.utils.utils import unique_slug_generator, unique_product_id_generator
+from baby_backend.utils.utils import unique_product_id_generator, unique_slug_generator
 
 from .models import Product
 

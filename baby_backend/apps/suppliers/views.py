@@ -1,16 +1,16 @@
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
 from ..accounts.permissions import IsStaffUser
-
-from .models import Supplier, SupplierDeliveryAddress, SupplierBillingAddress
-from .serializers import \
-    SupplierSerializer, \
-    SupplierRootSerializer, \
-    SupplierDeliveryAddressSerializer, \
-    SupplierDeliveryAddressRootSerializer, \
-    SupplierBillingAddressSerializer, \
-    SupplierBillingAddressRootSerializer
+from .models import Supplier, SupplierBillingAddress, SupplierDeliveryAddress
+from .serializers import (
+    SupplierBillingAddressRootSerializer,
+    SupplierBillingAddressSerializer,
+    SupplierDeliveryAddressRootSerializer,
+    SupplierDeliveryAddressSerializer,
+    SupplierRootSerializer,
+    SupplierSerializer,
+)
 
 
 class SupplierViewSet(ModelViewSet):

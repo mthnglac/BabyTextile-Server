@@ -2,10 +2,10 @@ import os
 import random
 from decimal import Decimal
 
-from django.db import models
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
+from django.db import models
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from baby_backend.utils.utils import calculate_nearest_half, unique_slug_generator
 

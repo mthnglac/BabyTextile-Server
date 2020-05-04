@@ -1,25 +1,34 @@
-from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet
 
-from ..accounts.permissions import \
-    IsStaffReadOnlyOrVendorPostOnly, \
-    IsStaffReadOnlyOrVendorReadOnly, IsHaveBillingProfile
-from .permissions import \
-    IsVendorAssociatedWithOrder, \
-    IsVendorAssociatedWithOrderShipping, \
-    IsVendorAssociatedWithProductPurchase, \
-    IsVendorAssociatedWithOrderShippingMovement
-from .serializers import \
-    OrderSerializer, \
-    OrderRootSerializer, \
-    OrderShippingInformationSerializer, \
-    OrderShippingInformationRootSerializer, \
-    OrderShippingInformationVendorSerializer, \
-    OrderShippingMovementSerializer, \
-    OrderShippingMovementRootSerializer, \
-    ProductPurchaseSerializer, \
-    ProductPurchaseRootSerializer
-from .models import Order, OrderShippingInformation, OrderShippingMovement, ProductPurchase
+from ..accounts.permissions import (
+    IsHaveBillingProfile,
+    IsStaffReadOnlyOrVendorPostOnly,
+    IsStaffReadOnlyOrVendorReadOnly,
+)
+from .models import (
+    Order,
+    OrderShippingInformation,
+    OrderShippingMovement,
+    ProductPurchase,
+)
+from .permissions import (
+    IsVendorAssociatedWithOrder,
+    IsVendorAssociatedWithOrderShipping,
+    IsVendorAssociatedWithOrderShippingMovement,
+    IsVendorAssociatedWithProductPurchase,
+)
+from .serializers import (
+    OrderRootSerializer,
+    OrderSerializer,
+    OrderShippingInformationRootSerializer,
+    OrderShippingInformationSerializer,
+    OrderShippingInformationVendorSerializer,
+    OrderShippingMovementRootSerializer,
+    OrderShippingMovementSerializer,
+    ProductPurchaseRootSerializer,
+    ProductPurchaseSerializer,
+)
 
 
 class OrderViewSet(ModelViewSet):

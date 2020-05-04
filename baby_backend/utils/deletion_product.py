@@ -1,5 +1,12 @@
-from ..apps.products.models import Product, ProductBrand, ProductModel, ProductSize, ProductColor, ProductCategory, \
-    ProductVAT
+from ..apps.products.models import (
+    Product,
+    ProductBrand,
+    ProductCategory,
+    ProductColor,
+    ProductModel,
+    ProductSize,
+    ProductVAT,
+)
 
 
 def deletion():

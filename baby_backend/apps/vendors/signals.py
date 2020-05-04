@@ -1,15 +1,14 @@
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+
+from baby_backend.utils.utils import (
+    unique_vendor_discount_code_generator,
+    unique_vendor_id_generator,
+)
 
 from ..billing.models import BillingProfile
 from ..carts.models import Cart
-from .models import Vendor, \
-    VendorDiscount, \
-    VendorBalance, VendorBillingAddress
-
-from baby_backend.utils.utils import \
-    unique_vendor_discount_code_generator, \
-    unique_vendor_id_generator
+from .models import Vendor, VendorBalance, VendorBillingAddress, VendorDiscount
 
 
 @receiver(pre_save, sender=Vendor)

@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import Customer, CustomerDeliveryAddress, CustomerDiscount, CustomerBillingAddress
+
+from .models import (
+    Customer,
+    CustomerBillingAddress,
+    CustomerDeliveryAddress,
+    CustomerDiscount,
+)
 
 
 class CustomerDeliveryAddressInline(admin.TabularInline):

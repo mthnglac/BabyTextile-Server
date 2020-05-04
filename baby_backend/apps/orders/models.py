@@ -1,18 +1,17 @@
-import math
 import datetime
+import math
 from decimal import Decimal
 
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import Count, Sum, Avg
+from django.db.models import Avg, Count, Sum
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 
 from ..billing.models import BillingProfile
 from ..carts.models import Cart
-from ..products.models import Product
 from ..customers.models import Customer
+from ..products.models import Product
 from ..vendors.models import VendorCustomer
-
 
 ORDER_STATUS_CHOICES = (
     # standard process
