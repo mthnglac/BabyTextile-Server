@@ -33,7 +33,10 @@ class UserViewSet(ModelViewSet):
     def get_object(self):
         if self.request.user.is_superuser and self.kwargs['pk'] == 'me':
             return self.request.user
-        return super(UserViewSet, self).get_object()
+        elif hasattr(self.request.user, 'vendor') and self.kwargs['pk'] == 'me':
+            return self.request.user
+        else:
+            return super(UserViewSet, self).get_object()
 
     @action(detail=True, methods=['post'], permission_classes=[IsAdminUser])
     def set_staff(self, request, pk=None):
