@@ -110,7 +110,7 @@ class VendorRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Vendor
-        fields = ['url', 'pk', 'vendor_id', 'user', 'tc_number', 'birth_date', 'birth_place', 'dealership_agreement',
+        fields = ['url', 'pk', 'vendor_unique_id', 'user', 'tc_number', 'birth_date', 'birth_place', 'dealership_agreement',
                   'sms_request', 'email_request', 'commission_rate', 'total_sales_qty', 'total_sales_amount',
                   'sales_quota', 'vendorcustomer_set', 'vendordeliveryaddress_set', 'vendorbillingaddress_set',
                   'vendorbankaccount', 'vendorinstagram_set', 'vendordiscount_set', 'vendorbalance', 'updated_at',
@@ -131,11 +131,11 @@ class VendorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Vendor
-        fields = ['url', 'pk', 'vendor_id', 'user', 'tc_number', 'birth_date', 'birth_place', 'dealership_agreement',
+        fields = ['url', 'pk', 'vendor_unique_id', 'user', 'tc_number', 'birth_date', 'birth_place', 'dealership_agreement',
                   'sms_request', 'email_request', 'commission_rate', 'total_sales_qty', 'total_sales_amount',
                   'sales_quota', 'vendorcustomer_set', 'vendordeliveryaddress_set', 'vendorbillingaddress_set',
                   'vendorbankaccount', 'vendorinstagram_set', 'vendordiscount_set', 'vendorbalance']
-        read_only_fields = ['vendor_id', 'commission_rate', 'total_sales_qty', 'total_sales_amount', 'sales_quota']
+        read_only_fields = ['vendor_unique_id', 'commission_rate', 'total_sales_qty', 'total_sales_amount', 'sales_quota']
 
 
 class VendorCustomerRootSerializer(serializers.HyperlinkedModelSerializer):

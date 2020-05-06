@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class GuestVendor(models.Model):
-    guest_vendor_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique Guest Vendor ID'))
+    guest_vendor_unique_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique Guest Vendor ID'))
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
     is_active = models.BooleanField(default=True, verbose_name=_('Active/Passive'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Balance'))

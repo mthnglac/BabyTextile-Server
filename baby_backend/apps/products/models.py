@@ -169,7 +169,7 @@ class ProductManager(models.Manager):
 
 
 class Product(models.Model):
-    product_id = models.CharField(max_length=120, blank=True, unique=True, null=True, verbose_name=_('Product ID'))
+    product_unique_id = models.CharField(max_length=120, blank=True, unique=True, null=True, verbose_name=_('Product ID'))
     name = models.CharField(max_length=150, blank=False, unique=True, verbose_name=_('Name'))
     active = models.BooleanField(default=True, verbose_name=_('Active'))
     featured = models.BooleanField(default=False, verbose_name=_('Featured'))
@@ -179,6 +179,9 @@ class Product(models.Model):
     brand_information = models.ForeignKey(
         ProductBrand, blank=True, on_delete=models.SET_NULL, null=True,
         verbose_name=_('Brand Information'))
+    model_information = models.ForeignKey(
+        ProductModel, blank=True, on_delete=models.SET_NULL, null=True,
+        verbose_name=_('Model Information'))
     sku = models.CharField(max_length=50, blank=True, verbose_name=_('Stock Keeping Unit'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
     size = models.ManyToManyField(ProductSize, verbose_name=_('Size'))

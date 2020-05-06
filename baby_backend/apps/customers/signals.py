@@ -3,7 +3,7 @@ from django.dispatch import receiver
 
 from baby_backend.utils.utils import (
     unique_customer_discount_code_generator,
-    unique_customer_id_generator,
+    unique_customer_unique_id_generator,
     unique_slug_generator,
 )
 
@@ -14,8 +14,8 @@ from .models import Customer, CustomerBillingAddress, CustomerDiscount
 
 @receiver(pre_save, sender=Customer)
 def pre_save_create_user(sender, instance, *args, **kwargs):
-    if not instance.customer_id:
-        instance.customer_id = unique_customer_id_generator(instance)
+    if not instance.customer_unique_id:
+        instance.customer_unique_id = unique_customer_unique_id_generator(instance)
 
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)

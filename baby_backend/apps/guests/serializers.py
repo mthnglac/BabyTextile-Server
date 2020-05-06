@@ -7,7 +7,7 @@ class GuestVendorRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = GuestVendor
-        fields = ['url', 'pk', 'guest_vendor_id', 'user', 'is_active', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'guest_vendor_unique_id', 'user', 'is_active', 'updated_at', 'created_at']
 
 
 class GuestVendorSerializer(serializers.HyperlinkedModelSerializer):

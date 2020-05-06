@@ -3,7 +3,7 @@ from django.dispatch import receiver
 
 from baby_backend.utils.utils import (
     unique_vendor_discount_code_generator,
-    unique_vendor_id_generator,
+    unique_vendor_unique_id_generator,
 )
 
 from ..billing.models import BillingProfile
@@ -13,9 +13,9 @@ from .models import Vendor, VendorBalance, VendorBillingAddress, VendorDiscount
 
 @receiver(pre_save, sender=Vendor)
 def pre_save_create_vendor(sender, instance, *args, **kwargs):
-    if not instance.vendor_id:
-        vendor_id = unique_vendor_id_generator(instance)
-        instance.vendor_id = vendor_id
+    if not instance.vendor_unique_id:
+        vendor_unique_id = unique_vendor_unique_id_generator(instance)
+        instance.vendor_unique_id = vendor_unique_id
 
 
 @receiver(post_save, sender=Vendor)

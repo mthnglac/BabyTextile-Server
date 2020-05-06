@@ -10,7 +10,7 @@ from ..products.models import Product
 
 
 class Cart(models.Model):
-    cart_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique Cart ID'))
+    cart_unique_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique Cart ID'))
     user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE, verbose_name=_('User'))
     qty = models.PositiveSmallIntegerField(default=0, verbose_name=_('Quantity'))
     subtotal = models.DecimalField(
@@ -33,8 +33,8 @@ class Cart(models.Model):
     def save(self, *args, **kwargs):
         x = self.calculate_cart_items()
         if self.qty != x['total_item_qty'] \
-                or self.subtotal != x['subtotal_amount'] \
-                or self.total != x['total_amount']:
+            or self.subtotal != x['subtotal_amount'] \
+            or self.total != x['total_amount']:
             self.qty = x['total_item_qty']
             self.subtotal = x['subtotal_amount']
             self.total = x['total_amount']
@@ -69,8 +69,8 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    item_id = models.CharField(max_length=120, blank=True,
-                               verbose_name=_('Unique Item ID'))
+    unique_item_id = models.CharField(max_length=120, blank=True,
+                                      verbose_name=_('Unique Item ID'))
     cart = models.ForeignKey(Cart, blank=False, on_delete=models.CASCADE,
                              verbose_name=_('Cart'))
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
@@ -95,7 +95,7 @@ class CartItem(models.Model):
 
     def save(self, *args, **kwargs):
         if self.product and self.line_total == 0 \
-                or self.product and self.line_total != self.product.sale_price * self.qty:
+            or self.product and self.line_total != self.product.sale_price * self.qty:
             self.line_total = self.product.sale_price * self.qty
         super(CartItem, self).save(*args, **kwargs)
 
