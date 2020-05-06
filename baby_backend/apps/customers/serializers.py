@@ -59,7 +59,7 @@ class CustomerRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ['url', 'pk', 'customer_id', 'user', 'tc_number', 'phone_number', 'customerdeliveryaddress_set',
+        fields = ['url', 'pk', 'customer_unique_id', 'user', 'tc_number', 'phone_number', 'customerdeliveryaddress_set',
                   'customerbillingaddress_set', 'customerdiscount_set', 'vendor', 'updated_at', 'created_at']
         extra_kwargs = {
             'customerdeliveryaddress_set': {'required': False},

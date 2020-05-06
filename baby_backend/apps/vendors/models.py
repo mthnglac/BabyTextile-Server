@@ -47,7 +47,7 @@ def upload_vendor_image_loc(instance, filename):
 
 
 class Vendor(models.Model):
-    vendor_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique ID'))
+    vendor_unique_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique ID'))
     user = models.OneToOneField(User, blank=False, on_delete=models.CASCADE, verbose_name=_('User'))
     tc_number = models.BigIntegerField(blank=False, unique=True, verbose_name=_('Citizenship Number'))
     phone_number = models.CharField(max_length=17, unique=True, blank=False, verbose_name=_('Phone Number'))

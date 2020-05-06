@@ -67,7 +67,7 @@ class OrderRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['url', 'pk', 'order_id', 'billing_profile', 'shipping_information', 'total_amount', 'cart', 'status',
+        fields = ['url', 'pk', 'unique_order_id', 'billing_profile', 'shipping_information', 'total_amount', 'cart', 'status',
                   'active', 'discount_code', 'commission_amount', 'ip_address', 'productpurchase_set', 'updated_at',
                   'created_at']
         extra_kwargs = {
@@ -90,7 +90,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Order
-        fields = ['url', 'pk', 'order_id', 'billing_profile', 'shipping_information', 'total_amount', 'cart', 'status',
+        fields = ['url', 'pk', 'unique_order_id', 'billing_profile', 'shipping_information', 'total_amount', 'cart', 'status',
                   'active', 'discount_code', 'commission_amount', 'ip_address', 'productpurchase_set']
         extra_kwargs = {
            'productpurchase_set': {'required': False}

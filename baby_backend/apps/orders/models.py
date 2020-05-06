@@ -193,7 +193,7 @@ class OrderManager(models.Manager):
 
 # Random, Unique
 class Order(models.Model):
-    order_id = models.CharField(blank=True, max_length=120, verbose_name=_('Order ID'))
+    unique_order_id = models.CharField(blank=True, max_length=120, verbose_name=_('Order ID'))
     billing_profile = models.ForeignKey(BillingProfile, null=True, on_delete=models.SET_NULL,
                                         verbose_name=_('Billing Profile'))
     # shipping_information satirini reverse lookup olarak baglama. arada bir bu fikre kapiliyorsun, once adres girilecek
@@ -219,7 +219,7 @@ class Order(models.Model):
     objects = OrderManager()
 
     def __str__(self):
-        return str(self.order_id)
+        return str(self.unique_order_id)
 
     class Meta:
         ordering = ['-updated_at']
@@ -242,7 +242,7 @@ class Order(models.Model):
         if qs.count() > 0:
             for x in qs:
                 self.productpurchase_set.create(
-                    item_id=x.item_id,
+                    unique_item_id=x.unique_item_id,
                     order=self,
                     product=x.product,
                     product_price=x.product.sale_price,
@@ -337,7 +337,7 @@ class Order(models.Model):
                 qty=p.qty,
                 line_total=p.product.sale_price * p.qty
             )
-        return ProductPurchase.objects.filter(order__order_id=self.order_id).count()
+        return ProductPurchase.objects.filter(order__unique_order_id=self.unique_order_id).count()
 
     def mark_paid(self):
         if self.status != 'paid':
@@ -359,8 +359,8 @@ class Order(models.Model):
 
 
 class ProductPurchase(models.Model):  # OrderItem
-    item_id = models.CharField(max_length=120, blank=True,
-                               verbose_name=_('Unique Item ID'))
+    unique_item_id = models.CharField(max_length=120, blank=True,
+                                      verbose_name=_('Unique Item ID'))
     order = models.ForeignKey(Order, blank=False, on_delete=models.CASCADE, verbose_name=_('Order'))
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, verbose_name=_('Product'))

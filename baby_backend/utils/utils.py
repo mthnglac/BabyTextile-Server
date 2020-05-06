@@ -90,7 +90,7 @@ def unique_key_generator(instance):
     return key
 
 
-def unique_vendor_id_generator(instance):
+def unique_vendor_unique_id_generator(instance):
     """
     This is for a Django project with key field
     """
@@ -98,7 +98,7 @@ def unique_vendor_id_generator(instance):
     key = random_string_generator(size=size)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(vendor_id=key).exists()
+    qs_exists = Klass.objects.filter(vendor_unique_id=key).exists()
     if qs_exists:
         return unique_slug_generator(instance)
     return key
@@ -125,7 +125,7 @@ def unique_vendor_guest_id_generator(instance):
     key = random_string_generator(size=size)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(guest_vendor_id=key).exists()
+    qs_exists = Klass.objects.filter(guest_vendor_unique_id=key).exists()
     if qs_exists:
         return unique_slug_generator(instance)
     return key
@@ -139,13 +139,13 @@ def unique_order_id_generator(instance, range_from=100000000000, range_until=100
     new_order_id = random.randrange(range_from, range_until)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(order_id=new_order_id).exists()
+    qs_exists = Klass.objects.filter(unique_order_id=new_order_id).exists()
     if qs_exists:
         return unique_order_id_generator(instance)
     return new_order_id
 
 
-def unique_customer_id_generator(instance):
+def unique_customer_unique_id_generator(instance):
     """
     This is for a Django project with key field
     """
@@ -153,7 +153,7 @@ def unique_customer_id_generator(instance):
     key = random_string_generator(size=size)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(customer_id=key).exists()
+    qs_exists = Klass.objects.filter(customer_unique_id=key).exists()
     if qs_exists:
         return unique_slug_generator(instance)
     return key
@@ -172,7 +172,7 @@ def unique_customer_discount_code_generator(instance):
     return key
 
 
-def unique_product_id_generator(instance):
+def unique_product_unique_id_generator(instance):
     """
     This is for a Django project with key field
     """
@@ -180,13 +180,13 @@ def unique_product_id_generator(instance):
     key = random_string_generator(size=size)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(product_id=key).exists()
+    qs_exists = Klass.objects.filter(product_unique_id=key).exists()
     if qs_exists:
         return unique_slug_generator(instance)
     return key
 
 
-def unique_cart_id_generator(instance):
+def unique_cart_unique_id_generator(instance):
     """
     This is for a Django project with key field
     """
@@ -194,13 +194,13 @@ def unique_cart_id_generator(instance):
     key = random_string_generator(size=size).upper()
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(cart_id=key).exists()
+    qs_exists = Klass.objects.filter(cart_unique_id=key).exists()
     if qs_exists:
         return unique_slug_generator(instance).upper()
     return key
 
 
-def unique_cart_item_id_generator(instance):
+def unique_cart_unique_item_id_generator(instance):
     """
     This is for a Django project with key field
     """
@@ -208,7 +208,7 @@ def unique_cart_item_id_generator(instance):
     key = random_string_generator(size=size)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(item_id=key).exists()
+    qs_exists = Klass.objects.filter(unique_item_id=key).exists()
     if qs_exists:
         return unique_slug_generator(instance)
     return key

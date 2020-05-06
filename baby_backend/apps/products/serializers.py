@@ -132,7 +132,7 @@ class ProductRootSerializer(TaggitSerializer, serializers.HyperlinkedModelSerial
 
     class Meta:
         model = Product
-        fields = ['url', 'pk', 'product_id', 'name', 'active', 'featured', 'best_seller', 'tags',
+        fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
                   'brand_information', 'sku', 'description', 'size', 'color', 'purchase_price', 'old_purchase_price',
                   'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty', 'purchased_stock',
                   'available_stock', 'meta_keywords', 'meta_description', 'productimage_set', 'productfile_set',
@@ -149,7 +149,7 @@ class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer
 
     class Meta:
         model = Product
-        fields = ['url', 'pk', 'product_id', 'name', 'active', 'featured', 'best_seller', 'tags',
+        fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
                   'brand_information', 'sku', 'description', 'size', 'color', 'purchase_price', 'old_purchase_price',
                   'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty', 'purchased_stock',
                   'available_stock', 'meta_keywords', 'meta_description', 'productimage_set', 'productfile_set']

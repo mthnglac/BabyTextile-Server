@@ -9,8 +9,8 @@ from .models import GuestVendor
 
 @receiver(pre_save, sender=GuestVendor)
 def pre_save_guest_vendor(sender, instance, *args, **kwargs):
-    guest_vendor_id = unique_vendor_guest_id_generator(instance)
-    instance.guest_vendor_id = guest_vendor_id
+    guest_vendor_unique_id = unique_vendor_guest_id_generator(instance)
+    instance.guest_vendor_unique_id = guest_vendor_unique_id
 
 
 @receiver(post_save, sender=GuestVendor)

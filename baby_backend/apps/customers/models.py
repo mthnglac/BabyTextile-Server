@@ -46,7 +46,7 @@ def upload_customer_image_loc(instance, filename):
 
 
 class Customer(models.Model):
-    customer_id = models.CharField(blank=True, max_length=120, verbose_name=_('Customer ID'))
+    customer_unique_id = models.CharField(blank=True, max_length=120, verbose_name=_('Customer ID'))
     user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('User'))
     tc_number = models.BigIntegerField(blank=False, verbose_name=_('Citizenship Number'))  # check unique from FrontEnd?
     gender = models.CharField(max_length=25, blank=True, choices=GENDER, verbose_name=_('Gender'))
