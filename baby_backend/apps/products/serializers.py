@@ -142,6 +142,7 @@ class ProductRootSerializer(TaggitSerializer, serializers.HyperlinkedModelSerial
             'productfile_set': {'required': False},
             'supplier': {'required': False}
         }
+        depth = 1
 
 
 class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
@@ -159,3 +160,4 @@ class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer
             'productfile_set': {'required': False},
             'supplier': {'required': False}
         }
+        depth = 1

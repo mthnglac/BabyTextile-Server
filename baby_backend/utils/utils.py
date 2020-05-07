@@ -177,7 +177,7 @@ def unique_product_unique_id_generator(instance):
     This is for a Django project with key field
     """
     size = random.randint(5, 15)
-    key = random_string_generator(size=size)
+    key = random_string_generator(size=size).upper()
 
     Klass = instance.__class__
     qs_exists = Klass.objects.filter(product_unique_id=key).exists()
