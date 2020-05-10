@@ -38,10 +38,13 @@ class ProductBrandAdmin(admin.ModelAdmin):
     inlines = [ProductModelInline]
 
 
+@admin.register(ProductImage)
+class ProductImageAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created_at', 'updated_at']
+
 admin.site.register(ProductModel)
 admin.site.register(ProductCategory)
 admin.site.register(ProductFile)
-admin.site.register(ProductImage)
 admin.site.register(ProductSize)
 admin.site.register(ProductColor)
 admin.site.register(ProductVAT)

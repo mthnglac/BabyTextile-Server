@@ -1,5 +1,8 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework.exceptions import NotFound
+from rest_framework.response import Response
 
 from ..accounts.permissions import IsStaffOrVendorReadOnly
 from .models import (
@@ -123,3 +126,12 @@ class ProductImageViewSet(ModelViewSet):
         if self.request.user.is_superuser or self.request.user.is_staff:
             return ProductImageRootSerializer
         return ProductImageSerializer
+
+    def list(self, request, *args, **kwargs):
+        return super(ProductImageViewSet, self).list(request, *args, **kwargs)
+
+    @action(detail=False)
+    def get_unique_images(self, request):
+        unique_images = ProductImage.objects.unique_all()
+        serializer = self.get_serializer(unique_images, many=True)
+        return Response(serializer.data)

@@ -172,18 +172,17 @@ def unique_customer_discount_code_generator(instance):
     return key
 
 
-def unique_product_unique_id_generator(instance):
+def unique_product_unique_id_generator(instance, range_from=100000, range_until=1000000):
     """
     This is for a Django project with key field
     """
-    size = random.randint(5, 15)
-    key = random_string_generator(size=size)
+    new_product_unique_id = random.randrange(range_from, range_until)
 
     Klass = instance.__class__
-    qs_exists = Klass.objects.filter(product_unique_id=key).exists()
+    qs_exists = Klass.objects.filter(product_unique_id=new_product_unique_id).exists()
     if qs_exists:
         return unique_slug_generator(instance)
-    return key
+    return new_product_unique_id
 
 
 def unique_cart_unique_id_generator(instance):
