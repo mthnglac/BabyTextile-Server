@@ -1,7 +1,6 @@
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
-from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
 
 from ..accounts.permissions import IsStaffOrVendorReadOnly
@@ -41,6 +40,7 @@ from .serializers import (
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     permission_classes = [IsAuthenticated, IsStaffOrVendorReadOnly]
+    filterset_fields = ['category__slug']
 
     def get_serializer_class(self):
         if self.request.user.is_superuser or self.request.user.is_staff:
@@ -130,8 +130,8 @@ class ProductImageViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         return super(ProductImageViewSet, self).list(request, *args, **kwargs)
 
-    # @action(detail=False)
-    # def get_first_images(self, request):
-    #     unique_images = ProductImage.objects.distinct_by_product()
-    #     serializer = self.get_serializer(unique_images, many=True)
-    #     return Response(serializer.data)
+    @action(detail=False)
+    def get_first_images(self, request):
+        unique_images = ProductImage.objects.distinct_by_product()
+        serializer = self.get_serializer(unique_images, many=True)
+        return Response(serializer.data)

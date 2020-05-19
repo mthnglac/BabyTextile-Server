@@ -70,6 +70,7 @@ THIRD_PARTY_APPS = [
     'taggit_serializer',
     'djoser',
     'corsheaders',
+    'django_filters',
 ]
 
 LOCAL_APPS = [
@@ -83,7 +84,6 @@ LOCAL_APPS = [
     'baby_backend.apps.products.apps.ProductsConfig',
     'baby_backend.apps.suppliers.apps.SuppliersConfig',
     'baby_backend.apps.vendors.apps.VendorsConfig',
-
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -293,7 +293,8 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_THROTTLE_RATES': {
         'user': '1/min'
-    }
+    },
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
