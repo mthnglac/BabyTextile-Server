@@ -238,6 +238,9 @@ class Product(models.Model):
     def get_billing_profiles(self):
         return self.productpurchase_set.all()
 
+    def get_categories(self):
+        return ', '.join([str(i) for i in self.category.all()])
+
 
 def upload_product_image_loc(instance, filename):
     new_filename = random.randint(1, 3910209312)

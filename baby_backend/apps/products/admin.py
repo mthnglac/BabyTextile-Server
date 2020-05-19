@@ -31,6 +31,7 @@ class ProductModelInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
+    list_display = ['name', 'get_categories']
 
 
 @admin.register(ProductBrand)
