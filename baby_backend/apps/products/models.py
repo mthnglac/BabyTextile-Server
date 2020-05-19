@@ -112,6 +112,7 @@ class ProductVAT(models.Model):
 
 
 class ProductCategory(models.Model):
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name=_('Slug'))
     name = models.CharField(max_length=20, blank=False, unique=True, verbose_name=_('Category'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
     active = models.BooleanField(default=True)
