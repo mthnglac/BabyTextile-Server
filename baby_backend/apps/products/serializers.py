@@ -133,15 +133,16 @@ class ProductRootSerializer(TaggitSerializer, serializers.HyperlinkedModelSerial
     class Meta:
         model = Product
         fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
-                  'brand_information', 'sku', 'description', 'size', 'color', 'purchase_price', 'old_purchase_price',
-                  'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty', 'purchased_stock',
-                  'available_stock', 'meta_keywords', 'meta_description', 'productimage_set', 'productfile_set',
-                  'updated_at', 'created_at']
+                  'brand_information', 'model_information', 'sku', 'description', 'size', 'color', 'purchase_price',
+                  'old_purchase_price', 'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty',
+                  'purchased_stock', 'available_stock', 'meta_keywords', 'meta_description', 'productimage_set',
+                  'productfile_set', 'updated_at', 'created_at']
         extra_kwargs = {
             'productimage_set': {'required': False},
             'productfile_set': {'required': False},
             'supplier': {'required': False}
         }
+        depth = 1
 
 
 class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer):
@@ -150,11 +151,13 @@ class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer
     class Meta:
         model = Product
         fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
-                  'brand_information', 'sku', 'description', 'size', 'color', 'purchase_price', 'old_purchase_price',
-                  'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty', 'purchased_stock',
-                  'available_stock', 'meta_keywords', 'meta_description', 'productimage_set', 'productfile_set']
+                  'brand_information', 'model_information', 'sku', 'description', 'size', 'color', 'purchase_price',
+                  'old_purchase_price', 'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty',
+                  'purchased_stock', 'available_stock', 'meta_keywords', 'meta_description', 'productimage_set',
+                  'productfile_set']
         extra_kwargs = {
             'productimage_set': {'required': False},
             'productfile_set': {'required': False},
             'supplier': {'required': False}
         }
+        depth = 1

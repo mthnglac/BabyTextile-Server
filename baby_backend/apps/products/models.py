@@ -159,7 +159,7 @@ class ProductManager(models.Manager):
         return self.get_queryset().active()
 
     def get_by_id(self, pk):
-        qs = self.get_queryset().filter(id=pk)
+        qs = self.get_queryset().filter(pk=pk)
         if qs.count() == 1:
             return qs.first()
         return None
@@ -258,6 +258,14 @@ def upload_product_image_loc(instance, filename):
     return location + final_filename
 
 
+class ProductImageManager(models.Manager):
+    def distinct_by_product(self):
+        qs = self.model.objects.order_by('product_id', 'created_at').distinct('product_id')
+        # -created_at olarak siralanmiyordu. boyle bi cozum yaptim.
+        qs_reversed = qs.reverse()
+        return qs_reversed
+
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
     name = models.CharField(max_length=120, blank=False, verbose_name=_('Name'))
@@ -265,11 +273,13 @@ class ProductImage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of File'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of File'))
 
+    objects = ProductImageManager()
+
     def __str__(self):
         return self.name
 
     class Meta:
-        ordering = ['updated_at']
+        ordering = ['created_at']
         verbose_name = _('Product Image')
         verbose_name_plural = _('Product Images')
 
