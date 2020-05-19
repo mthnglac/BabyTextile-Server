@@ -131,7 +131,7 @@ class ProductImageViewSet(ModelViewSet):
         return super(ProductImageViewSet, self).list(request, *args, **kwargs)
 
     @action(detail=False)
-    def get_unique_images(self, request):
-        unique_images = ProductImage.objects.unique_all()
+    def get_first_images(self, request):
+        unique_images = ProductImage.objects.distinct_by_product()
         serializer = self.get_serializer(unique_images, many=True)
         return Response(serializer.data)

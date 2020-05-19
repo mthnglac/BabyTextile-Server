@@ -259,8 +259,11 @@ def upload_product_image_loc(instance, filename):
 
 
 class ProductImageManager(models.Manager):
-    def unique_all(self):
-        return self.model.objects.order_by('product_id', 'created_at').distinct('product_id')
+    def distinct_by_product(self):
+        qs = self.model.objects.order_by('product_id', 'created_at').distinct('product_id')
+        # -created_at olarak siralanmiyordu. boyle bi cozum yaptim.
+        qs_reversed = qs.reverse()
+        return qs_reversed
 
 
 class ProductImage(models.Model):
