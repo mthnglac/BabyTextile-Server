@@ -88,7 +88,7 @@ class ProductCategoryRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductCategory
-        fields = ['url', 'pk', 'name', 'description', 'active', 'meta_keywords', 'meta_description', 'updated_at',
+        fields = ['url', 'pk', 'slug', 'name', 'description', 'active', 'meta_keywords', 'meta_description', 'updated_at',
                   'created_at']
 
 
@@ -96,7 +96,7 @@ class ProductCategorySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductCategory
-        fields = ['url', 'pk', 'name', 'description', 'active', 'meta_keywords', 'meta_description']
+        fields = ['url', 'pk', 'slug', 'name', 'description', 'active', 'meta_keywords', 'meta_description']
 
 
 class ProductModelRootSerializer(serializers.HyperlinkedModelSerializer):

@@ -1,9 +1,10 @@
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 from baby_backend.utils.utils import unique_product_unique_id_generator, unique_slug_generator
 
-from .models import Product
+from .models import Product, ProductCategory
 
 
 @receiver(pre_save, sender=Product)
@@ -21,3 +22,9 @@ def post_save_product(sender, instance, created, *args, **kwargs):
         if instance.cartitem_set:
             for item in instance.cartitem_set.all():
                 item.refresh_item()
+
+
+@receiver(pre_save, sender=ProductCategory)
+def pre_save_product_category(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = slugify(instance.name)

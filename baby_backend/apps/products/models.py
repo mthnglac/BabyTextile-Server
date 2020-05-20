@@ -112,6 +112,7 @@ class ProductVAT(models.Model):
 
 
 class ProductCategory(models.Model):
+    slug = models.SlugField(unique=True, blank=True, null=True, verbose_name=_('Slug'))
     name = models.CharField(max_length=20, blank=False, unique=True, verbose_name=_('Category'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
     active = models.BooleanField(default=True)
@@ -236,6 +237,9 @@ class Product(models.Model):
 
     def get_billing_profiles(self):
         return self.productpurchase_set.all()
+
+    def get_categories(self):
+        return ', '.join([str(i) for i in self.category.all()])
 
 
 def upload_product_image_loc(instance, filename):
