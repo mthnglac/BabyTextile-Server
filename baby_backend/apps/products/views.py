@@ -40,7 +40,7 @@ from .serializers import (
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     permission_classes = [IsAuthenticated, IsStaffOrVendorReadOnly]
-    filterset_fields = ['category__slug']
+    filterset_fields = ['category__name']
 
     def get_serializer_class(self):
         if self.request.user.is_superuser or self.request.user.is_staff:
