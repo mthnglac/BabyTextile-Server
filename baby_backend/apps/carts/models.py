@@ -69,21 +69,14 @@ class Cart(models.Model):
 
 
 class CartItem(models.Model):
-    unique_item_id = models.CharField(max_length=120, blank=True,
-                                      verbose_name=_('Unique Item ID'))
-    cart = models.ForeignKey(Cart, blank=False, on_delete=models.CASCADE,
-                             verbose_name=_('Cart'))
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,
-                                verbose_name=_('Product'))
-    qty = models.PositiveSmallIntegerField(default=1,
-                                           verbose_name=_('Quantity'))
+    unique_item_id = models.CharField(max_length=120, blank=True, verbose_name=_('Unique Item ID'))
+    cart = models.ForeignKey(Cart, blank=False, on_delete=models.CASCADE, verbose_name=_('Cart'))
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
+    qty = models.PositiveSmallIntegerField(default=1, verbose_name=_('Quantity'))
     line_total = models.DecimalField(
-        blank=True, max_digits=100, decimal_places=2, default=Decimal(0.00),
-        verbose_name=_('Line Total'))
-    created_at = models.DateTimeField(auto_now_add=True,
-                                      verbose_name=_('Create date of Cart'))
-    updated_at = models.DateTimeField(auto_now=True,
-                                      verbose_name=_('Update date of Cart'))
+        blank=True, max_digits=100, decimal_places=2, default=Decimal(0.00), verbose_name=_('Line Total'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Cart'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Cart'))
 
     def __str__(self):
         return self.product.name
