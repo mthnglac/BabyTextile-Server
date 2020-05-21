@@ -35,6 +35,7 @@ def upload_image_path(instance, filename):
 
 
 class ProductBrand(models.Model):
+    slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
     name = models.CharField(max_length=30, unique=True, blank=False, verbose_name=_('Brand'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Product Brand'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Product Brand'))
@@ -51,6 +52,7 @@ class ProductBrand(models.Model):
 class ProductModel(models.Model):
     brand = models.ForeignKey(
         ProductBrand, blank=True, on_delete=models.CASCADE, null=True, verbose_name=_('Brand Information'))
+    slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
     name = models.CharField(max_length=30, unique=True, blank=False, verbose_name=_('Model'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Product Model'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Product Model'))
@@ -65,6 +67,8 @@ class ProductModel(models.Model):
 
 
 class ProductSize(models.Model):
+    slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
+    name = models.CharField(max_length=20, unique=True, null=True, blank=True, verbose_name=_('Size Name'))
     start_month = models.PositiveSmallIntegerField(default=0, blank=True, verbose_name=_('Start Month'))
     end_month = models.PositiveSmallIntegerField(default=0, blank=True, verbose_name=_('End Month'))
     age = models.CharField(max_length=10, blank=True, verbose_name=_('Age'))
@@ -83,7 +87,8 @@ class ProductSize(models.Model):
 
 
 class ProductColor(models.Model):
-    name = models.CharField(max_length=15, unique=True, blank=False, verbose_name=_('Color'))
+    slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
+    name = models.CharField(max_length=15, unique=True, blank=False, verbose_name=_('Color Name'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Color'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Color'))
 
@@ -186,7 +191,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=50, blank=True, verbose_name=_('Stock Keeping Unit'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
     size = models.ManyToManyField(ProductSize, verbose_name=_('Size'))
-    color = models.ForeignKey(ProductColor, on_delete=models.SET_NULL, null=True, blank=True, verbose_name=_('Color'))
+    color = models.ManyToManyField(ProductColor, verbose_name=_('Color'))
     purchase_price = models.DecimalField(
         max_digits=25, decimal_places=2, verbose_name=_('Purchase Price'))
     old_purchase_price = models.DecimalField(
@@ -273,6 +278,7 @@ class ProductImageManager(models.Manager):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_('Product'))
     name = models.CharField(max_length=120, blank=False, verbose_name=_('Name'))
+    slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
     image = models.ImageField(upload_to=upload_product_image_loc, null=True, blank=False, verbose_name=_('Image'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of File'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of File'))
