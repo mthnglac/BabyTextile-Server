@@ -32,14 +32,14 @@ class ProductImageRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ['url', 'pk', 'product', 'name', 'image', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'product', 'name', 'image', 'color', 'updated_at', 'created_at']
 
 
 class ProductImageSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ['url', 'pk', 'product', 'name', 'image']
+        fields = ['url', 'pk', 'product', 'name', 'image', 'color']
 
 
 class ProductSizeRootSerializer(serializers.HyperlinkedModelSerializer):

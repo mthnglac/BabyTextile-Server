@@ -191,7 +191,7 @@ class Product(models.Model):
     sku = models.CharField(max_length=50, blank=True, verbose_name=_('Stock Keeping Unit'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
     size = models.ManyToManyField(ProductSize, verbose_name=_('Size'))
-    color = models.ManyToManyField(ProductColor, verbose_name=_('Color'))
+    color = models.ManyToManyField(ProductColor, blank=False, verbose_name=_('Color'))
     purchase_price = models.DecimalField(
         max_digits=25, decimal_places=2, verbose_name=_('Purchase Price'))
     old_purchase_price = models.DecimalField(
@@ -280,6 +280,8 @@ class ProductImage(models.Model):
     name = models.CharField(max_length=120, blank=False, verbose_name=_('Name'))
     slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
     image = models.ImageField(upload_to=upload_product_image_loc, null=True, blank=False, verbose_name=_('Image'))
+    color = models.ForeignKey(ProductColor, blank=False, null=True, on_delete=models.SET_NULL,
+                              verbose_name=_('Product Color'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of File'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of File'))
 
