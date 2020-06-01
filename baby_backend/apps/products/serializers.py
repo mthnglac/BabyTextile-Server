@@ -11,7 +11,23 @@ from ..products.models import (
     ProductModel,
     ProductSize,
     ProductVAT,
+    ProductVariant,
 )
+
+
+class ProductVariantRootSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = ProductVariant
+        fields = ['url', 'pk', 'title', 'color', 'size', 'image', 'qty',
+                  'updated_at', 'created_at']
+
+
+class ProductVariantSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = ProductVariant
+        fields = ['url', 'pk', 'title', 'color', 'size', 'image', 'qty']
 
 
 class ProductFileRootSerializer(serializers.HyperlinkedModelSerializer):
@@ -32,14 +48,14 @@ class ProductImageRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ['url', 'pk', 'product', 'name', 'image', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'product', 'name', 'image', 'color', 'updated_at', 'created_at']
 
 
 class ProductImageSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ['url', 'pk', 'product', 'name', 'image']
+        fields = ['url', 'pk', 'product', 'name', 'image', 'color']
 
 
 class ProductSizeRootSerializer(serializers.HyperlinkedModelSerializer):
@@ -133,10 +149,10 @@ class ProductRootSerializer(TaggitSerializer, serializers.HyperlinkedModelSerial
     class Meta:
         model = Product
         fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
-                  'brand_information', 'model_information', 'sku', 'description', 'size', 'color', 'purchase_price',
+                  'brand_information', 'model_information', 'sku', 'description', 'purchase_price',
                   'old_purchase_price', 'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty',
                   'purchased_stock', 'available_stock', 'meta_keywords', 'meta_description', 'productimage_set',
-                  'productfile_set', 'updated_at', 'created_at']
+                  'productfile_set', 'productvariant_set', 'updated_at', 'created_at']
         extra_kwargs = {
             'productimage_set': {'required': False},
             'productfile_set': {'required': False},
@@ -151,10 +167,10 @@ class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer
     class Meta:
         model = Product
         fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
-                  'brand_information', 'model_information', 'sku', 'description', 'size', 'color', 'purchase_price',
+                  'brand_information', 'model_information', 'sku', 'description', 'purchase_price',
                   'old_purchase_price', 'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty',
                   'purchased_stock', 'available_stock', 'meta_keywords', 'meta_description', 'productimage_set',
-                  'productfile_set']
+                  'productfile_set', 'productvariant_set']
         extra_kwargs = {
             'productimage_set': {'required': False},
             'productfile_set': {'required': False},

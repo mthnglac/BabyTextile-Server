@@ -14,6 +14,7 @@ from .models import (
     ProductModel,
     ProductSize,
     ProductVAT,
+    ProductVariant,
 )
 from .serializers import (
     ProductBrandRootSerializer,
@@ -34,6 +35,8 @@ from .serializers import (
     ProductSizeSerializer,
     ProductVATRootSerializer,
     ProductVATSerializer,
+    ProductVariantRootSerializer,
+    ProductVariantSerializer,
 )
 
 
@@ -127,11 +130,18 @@ class ProductImageViewSet(ModelViewSet):
             return ProductImageRootSerializer
         return ProductImageSerializer
 
-    def list(self, request, *args, **kwargs):
-        return super(ProductImageViewSet, self).list(request, *args, **kwargs)
-
     @action(detail=False)
     def get_first_images(self, request):
         unique_images = ProductImage.objects.distinct_by_product()
         serializer = self.get_serializer(unique_images, many=True)
         return Response(serializer.data)
+
+
+class ProductVariantViewSet(ModelViewSet):
+    queryset = ProductVariant.objects.all()
+    permission_classes = [IsAuthenticated, IsStaffOrVendorReadOnly]
+
+    def get_serializer_class(self):
+        if self.request.user.is_superuser or self.request.user.is_staff:
+            return ProductVariantRootSerializer
+        return ProductVariantSerializer
