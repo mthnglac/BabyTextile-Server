@@ -77,8 +77,9 @@ class ProductSize(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Size'))
 
     def __str__(self):
-        return '{} - {} | {}'.format(self.start_month, self.end_month, str(self.size)) if not self.age \
-            else '{} | {}'.format(self.age, str(self.size))
+        return self.name
+        # return '{} - {} | {}'.format(self.start_month, self.end_month, str(self.size)) if not self.age \
+        #     else '{} | {}'.format(self.age, str(self.size))
 
     class Meta:
         ordering = ['-updated_at']
@@ -89,6 +90,7 @@ class ProductSize(models.Model):
 class ProductColor(models.Model):
     slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
     name = models.CharField(max_length=15, unique=True, blank=False, verbose_name=_('Color Name'))
+    code = models.CharField(max_length=10, blank=True, verbose_name=_('Color Code'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Color'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Color'))
 
@@ -190,8 +192,8 @@ class Product(models.Model):
         verbose_name=_('Model Information'))
     sku = models.CharField(max_length=50, blank=True, verbose_name=_('Stock Keeping Unit'))
     description = models.TextField(blank=True, verbose_name=_('Description'))
-    size = models.ManyToManyField(ProductSize, verbose_name=_('Size'))
-    color = models.ManyToManyField(ProductColor, blank=False, verbose_name=_('Color'))
+    # size = models.ManyToManyField(ProductSize, blank=True, verbose_name=_('Size'))
+    # color = models.ManyToManyField(ProductColor, blank=True, verbose_name=_('Color'))
     purchase_price = models.DecimalField(
         max_digits=25, decimal_places=2, verbose_name=_('Purchase Price'))
     old_purchase_price = models.DecimalField(
@@ -280,8 +282,6 @@ class ProductImage(models.Model):
     name = models.CharField(max_length=120, blank=False, verbose_name=_('Name'))
     slug = models.SlugField(unique=True, null=True, blank=True, verbose_name=_('Slug'))
     image = models.ImageField(upload_to=upload_product_image_loc, null=True, blank=False, verbose_name=_('Image'))
-    color = models.ForeignKey(ProductColor, blank=False, null=True, on_delete=models.SET_NULL,
-                              verbose_name=_('Product Color'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of File'))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of File'))
 
@@ -336,3 +336,22 @@ class ProductFile(models.Model):
         if self.name:
             return self.name
         return og_name
+
+
+class ProductVariant(models.Model):
+    product = models.ForeignKey(Product, blank=False, on_delete=models.CASCADE, verbose_name=_('Product'))
+    title = models.CharField(max_length=20, blank=True, verbose_name=_('Title'))
+    color = models.ForeignKey(ProductColor, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('Color'))
+    size = models.ForeignKey(ProductSize, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('Size'))
+    image = models.ForeignKey(ProductImage, blank=True, null=True, on_delete=models.SET_NULL, verbose_name=_('Image'))
+    qty = models.PositiveSmallIntegerField(default=0, verbose_name=_('Quantity'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Create date of Product Variant'))
+    updated_at = models.DateTimeField(auto_now=True, verbose_name=_('Update date of Product Variant'))
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-updated_at']
+        verbose_name = _('Product Variant')
+        verbose_name_plural = _('Product Variants')
