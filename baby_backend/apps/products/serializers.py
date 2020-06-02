@@ -48,42 +48,42 @@ class ProductImageRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ['url', 'pk', 'product', 'name', 'image', 'color', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'product', 'name', 'image', 'updated_at', 'created_at']
 
 
 class ProductImageSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductImage
-        fields = ['url', 'pk', 'product', 'name', 'image', 'color']
+        fields = ['url', 'pk', 'product', 'name', 'image']
 
 
 class ProductSizeRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductSize
-        fields = ['url', 'pk', 'start_month', 'end_month', 'age', 'size', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'slug', 'name', 'start_month', 'end_month', 'age', 'size', 'updated_at', 'created_at']
 
 
 class ProductSizeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductSize
-        fields = ['url', 'pk', 'start_month', 'end_month', 'age', 'size']
+        fields = ['url', 'pk', 'slug', 'name', 'start_month', 'end_month', 'age', 'size']
 
 
 class ProductColorRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductColor
-        fields = ['url', 'pk', 'name', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'slug', 'name', 'code', 'updated_at', 'created_at']
 
 
 class ProductColorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductColor
-        fields = ['url', 'pk', 'name']
+        fields = ['url', 'pk', 'slug', 'name', 'code']
 
 
 class ProductVATRootSerializer(serializers.HyperlinkedModelSerializer):
@@ -104,7 +104,8 @@ class ProductCategoryRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductCategory
-        fields = ['url', 'pk', 'slug', 'name', 'description', 'active', 'meta_keywords', 'meta_description', 'updated_at',
+        fields = ['url', 'pk', 'slug', 'name', 'description', 'active',
+                  'meta_keywords', 'meta_description', 'updated_at',
                   'created_at']
 
 
