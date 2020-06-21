@@ -10,7 +10,13 @@ from .models import (
     ProductModel,
     ProductSize,
     ProductVAT,
+    ProductVariant,
 )
+
+
+class ProductVariantInline(admin.TabularInline):
+    model = ProductVariant
+    extra = 1
 
 
 class ProductFileInline(admin.TabularInline):
@@ -30,7 +36,7 @@ class ProductModelInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductImageInline]
+    inlines = [ProductImageInline, ProductVariantInline]
     list_display = ['name', 'get_categories']
 
 
@@ -54,3 +60,4 @@ admin.site.register(ProductFile)
 admin.site.register(ProductSize)
 admin.site.register(ProductColor)
 admin.site.register(ProductVAT)
+admin.site.register(ProductVariant)

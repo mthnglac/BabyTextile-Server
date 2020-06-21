@@ -11,7 +11,23 @@ from ..products.models import (
     ProductModel,
     ProductSize,
     ProductVAT,
+    ProductVariant,
 )
+
+
+class ProductVariantRootSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = ProductVariant
+        fields = ['url', 'pk', 'title', 'color', 'size', 'image', 'qty',
+                  'updated_at', 'created_at']
+
+
+class ProductVariantSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = ProductVariant
+        fields = ['url', 'pk', 'title', 'color', 'size', 'image', 'qty']
 
 
 class ProductFileRootSerializer(serializers.HyperlinkedModelSerializer):
@@ -46,28 +62,28 @@ class ProductSizeRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductSize
-        fields = ['url', 'pk', 'start_month', 'end_month', 'age', 'size', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'slug', 'name', 'start_month', 'end_month', 'age', 'size', 'updated_at', 'created_at']
 
 
 class ProductSizeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductSize
-        fields = ['url', 'pk', 'start_month', 'end_month', 'age', 'size']
+        fields = ['url', 'pk', 'slug', 'name', 'start_month', 'end_month', 'age', 'size']
 
 
 class ProductColorRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductColor
-        fields = ['url', 'pk', 'name', 'updated_at', 'created_at']
+        fields = ['url', 'pk', 'slug', 'name', 'code', 'updated_at', 'created_at']
 
 
 class ProductColorSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductColor
-        fields = ['url', 'pk', 'name']
+        fields = ['url', 'pk', 'slug', 'name', 'code']
 
 
 class ProductVATRootSerializer(serializers.HyperlinkedModelSerializer):
@@ -88,7 +104,8 @@ class ProductCategoryRootSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = ProductCategory
-        fields = ['url', 'pk', 'slug', 'name', 'description', 'active', 'meta_keywords', 'meta_description', 'updated_at',
+        fields = ['url', 'pk', 'slug', 'name', 'description', 'active',
+                  'meta_keywords', 'meta_description', 'updated_at',
                   'created_at']
 
 
@@ -133,10 +150,10 @@ class ProductRootSerializer(TaggitSerializer, serializers.HyperlinkedModelSerial
     class Meta:
         model = Product
         fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
-                  'brand_information', 'model_information', 'sku', 'description', 'size', 'color', 'purchase_price',
+                  'brand_information', 'model_information', 'sku', 'description', 'purchase_price',
                   'old_purchase_price', 'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty',
                   'purchased_stock', 'available_stock', 'meta_keywords', 'meta_description', 'productimage_set',
-                  'productfile_set', 'updated_at', 'created_at']
+                  'productfile_set', 'productvariant_set', 'updated_at', 'created_at']
         extra_kwargs = {
             'productimage_set': {'required': False},
             'productfile_set': {'required': False},
@@ -151,10 +168,10 @@ class ProductSerializer(TaggitSerializer, serializers.HyperlinkedModelSerializer
     class Meta:
         model = Product
         fields = ['url', 'pk', 'product_unique_id', 'name', 'active', 'featured', 'best_seller', 'tags',
-                  'brand_information', 'model_information', 'sku', 'description', 'size', 'color', 'purchase_price',
+                  'brand_information', 'model_information', 'sku', 'description', 'purchase_price',
                   'old_purchase_price', 'sale_price', 'old_sale_price', 'vat', 'category', 'supplier', 'sold_qty',
                   'purchased_stock', 'available_stock', 'meta_keywords', 'meta_description', 'productimage_set',
-                  'productfile_set']
+                  'productfile_set', 'productvariant_set']
         extra_kwargs = {
             'productimage_set': {'required': False},
             'productfile_set': {'required': False},

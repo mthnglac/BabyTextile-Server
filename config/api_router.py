@@ -27,6 +27,7 @@ from baby_backend.apps.products.views import (
     ProductSizeViewSet,
     ProductVATViewSet,
     ProductViewSet,
+    ProductVariantViewSet,
 )
 from baby_backend.apps.suppliers.views import (
     SupplierBillingAddressViewSet,
@@ -72,6 +73,7 @@ router.register(r'product-categories', ProductCategoryViewSet)
 router.register(r'product-vats', ProductVATViewSet)
 router.register(r'product-files', ProductFileViewSet)
 router.register(r'product-images', ProductImageViewSet)
+router.register(r'product-variants', ProductVariantViewSet)
 router.register(r'suppliers', SupplierViewSet)
 router.register(r'supplier-delivery-addresses', SupplierDeliveryAddressViewSet)
 router.register(r'supplier-billing-addresses', SupplierBillingAddressViewSet)
