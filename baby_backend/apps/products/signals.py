@@ -12,6 +12,7 @@ from .models import (
     ProductColor,
     ProductSize,
     ProductImage,
+    ProductVariant,
 )
 
 
@@ -66,3 +67,9 @@ def pre_save_product_size(sender, instance, *args, **kwargs):
 def pre_save_product_category(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.name)
+
+
+@receiver(pre_save, sender=ProductVariant)
+def pre_save_product_variant(sender, instance, *args, **kwargs):
+    if not instance.title:
+        instance.title = instance.product.name
